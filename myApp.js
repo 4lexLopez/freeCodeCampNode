@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var express = require('express');
 var app = express();
 var absolutePath = __dirname + '/views/index.html';
@@ -9,7 +11,7 @@ var publicPath = __dirname + '/public';
 // app.get('/', function(req, res) {
 //   res.sendFile(absolutePath);
 // });
-
+console.log("config message: " + process.env.MESSAGE_STYLE);
 app.get('/', function(req, res) {
   var message = '';
   process.env.MESSAGE_STYLE === 'uppercase' ? message = "HELLO JSON" : message = "Hello json";
