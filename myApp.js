@@ -7,6 +7,11 @@ var jsonPath = __dirname + '/json';
 var publicPath = __dirname + '/public';
 // const mySecret = process.env['MESSAGE_STYLE'];
 
+var myMiddle = function(req, res, next) {
+  console.log(`${req.method} ${req.path} - ${req.ip}`);
+  next();
+}
+app.use(myMiddle);
 app.use('/public', express.static(publicPath));
 app.get('/', function(req, res) {
   res.sendFile(absolutePath);
@@ -17,40 +22,4 @@ app.get('/json', function(req, res) {
   process.env.MESSAGE_STYLE === 'uppercase' ? message = "HELLO JSON" : message = "Hello json";
   res.json({"message": message});
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  module.exports = app;
