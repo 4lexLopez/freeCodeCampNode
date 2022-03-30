@@ -11,5 +11,10 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js"
-	}
+	},
+	"keywords": [
+		"node",
+		"heroku",
+		"express"
+	]
 }

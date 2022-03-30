@@ -12,7 +12,7 @@ app.get('/', function(req, res) {
   res.sendFile(absolutePath);
 });
 console.log("config message: " + process.env.MESSAGE_STYLE);
-app.get('/log', function(req, res) {
+app.get('/json', function(req, res) {
   var message = '';
   process.env.MESSAGE_STYLE === 'uppercase' ? message = "HELLO JSON" : message = "Hello json";
   res.json({"message": message});
