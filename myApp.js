@@ -2,6 +2,13 @@ require('dotenv').config();
 
 var express = require('express');
 var app = express();
+// Item 11: require body parser to parse data coming into POST requests
+var bodyParser = require('body-parser');
+// Item 11: middleware to handle data encoded into the URL using POST method
+var myUrlEncoder = bodyParser.urlencoded({extended: false});
+app.use(myUrlEncoder);
+app.use(bodyParser.json());
+
 var absolutePath = __dirname + '/views/index.html';
 var jsonPath = __dirname + '/json';
 var publicPath = __dirname + '/public';
@@ -32,14 +39,14 @@ app.get('/now', function(req, res, next) {
   res.json({"time": req.now});
 });
 
-// item 6: HTTP method 
+// item 6: response a GET method using data stored in environment variables  
 app.get('/json', function(req, res) {
   var message = '';
   process.env.MESSAGE_STYLE === 'uppercase' ? message = "HELLO JSON" : message = "Hello json";
   res.json({"message": message});
 });
 
-// Item 9: HTTP method
+// Item 9: echo API that return data written in the URL
 app.get('/:word/echo', function(req, res) {
   var echoWord = req.params.word;
   res.json({'echo':echoWord});
@@ -47,7 +54,13 @@ app.get('/:word/echo', function(req, res) {
 
 // Item 10: Get Query Parameter Input from the Client
 app.get('/name', function(req, res) {
-  // var name = app.route(path).get(handler).post(handler);
   res.json({'name':req.query.first + ' ' + req.query.last});
+  console.log(req.body);
 }); 
+
+// Item 11: using POST method and body-parser middleware as well
+app.post('/name', function(req, res) {
+  console.log(req.body);
+});
+
 module.exports = app;
