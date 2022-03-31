@@ -55,12 +55,12 @@ app.get('/:word/echo', function(req, res) {
 // Item 10: Get Query Parameter Input from the Client
 app.get('/name', function(req, res) {
   res.json({'name':req.query.first + ' ' + req.query.last});
-  console.log(req.body);
+  // console.log(req.body);
 }); 
 
 // Item 11: using POST method and body-parser middleware as well
 app.post('/name', function(req, res) {
-  console.log(req.body);
+  res.json({'name':req.body.first + ' ' + req.body.last});
 });
 
 module.exports = app;
