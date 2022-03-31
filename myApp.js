@@ -5,6 +5,7 @@ var app = express();
 var absolutePath = __dirname + '/views/index.html';
 var jsonPath = __dirname + '/json';
 var publicPath = __dirname + '/public';
+var path = '/name';
 // const mySecret = process.env['MESSAGE_STYLE'];
 
 // item 9: extracting parameters from URL
@@ -38,9 +39,15 @@ app.get('/json', function(req, res) {
   res.json({"message": message});
 });
 
+// Item 9: HTTP method
 app.get('/:word/echo', function(req, res) {
   var echoWord = req.params.word;
   res.json({'echo':echoWord});
 }); 
 
+// Item 10: Get Query Parameter Input from the Client
+app.get('/name', function(req, res) {
+  // var name = app.route(path).get(handler).post(handler);
+  res.json({'name':req.query.first + ' ' + req.query.last});
+}); 
 module.exports = app;
